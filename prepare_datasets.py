@@ -10,15 +10,11 @@ from sklearn.preprocessing import MinMaxScaler
 if __name__ == '__main__':
     
     columns_to_keep = ['id', 'truncated', 'Age', 'Months_of_work_experience', 'Entry_month_sin', 'Entry_day_sin',
-       'Entry_month_cos', 'Entry_day_cos', 'Gender', 'Education_category', 'Dissabilities',
-        'Reason_for_PES_entry', 'eApplication', 'Employment_plan_status', 'Employability_assessment',
-        'Employment_plan_ready', 'duration']
-
+       'Entry_month_cos', 'Entry_day_cos', 'Gender', 'Education_category', 'Profession_program', 'Dissabilities',
+        'Reason_for_PES_entry', 'eApplication', 'Employment_plan_status', 'Employability_assessment', 'duration']
     continuous = ['Age', 'Months_of_work_experience', 'Entry_month_sin', 'Entry_day_sin',
-           'Entry_month_cos', 'Entry_day_cos']
-    
-    cols = ['eApplication', 'Gender']
-    
+            'Entry_month_cos', 'Entry_day_cos']
+    cols = ['eApplication', 'Gender', 'Profession_program']
     for_scaling = ['Age', 'Months_of_work_experience']
 
     data_path = os.getcwd() + '/data/'
@@ -41,7 +37,7 @@ if __name__ == '__main__':
     scaled_values = scaler.fit_transform(df[[col for col in df.columns if col in for_scaling]]) 
     df.loc[:,[col for col in df.columns if col in for_scaling]] = scaled_values
     
-    df_test = df.sample(frac=0.2)
+    df_test = df.sample(frac=0.2, random_state = 11)
     df_train = df.drop(df_test.index)
     
     df_train = df_train.set_index('id')

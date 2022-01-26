@@ -14,7 +14,7 @@ def load_hecat_data(path, filename):
     return df
 
 def drop_unnecessary_columns(hecat_df):
-    hecat_df = hecat_df.drop(columns = ['DatumObdobja', 'MeseciBrezpos', 'DatumIzpisaBO', 'IDizpisaBO', 'Razvrstitev ZRSZ', 'PrejemnikDNDP', 'PrejemnikCSD', 'IdIndikatorPrometa', 'OEN', 'IDUpEnote', 'IzdelanZN', 'mso_from', 'mso_to', 'Unnamed: 0'])
+    hecat_df = hecat_df.drop(columns = ['DatumObdobja', 'MeseciBrezpos', 'DatumIzpisaBO', 'IDizpisaBO', 'PrejemnikDNDP', 'PrejemnikCSD', 'IdIndikatorPrometa', 'OEN', 'IDUpEnote', 'IzdelanZN', 'mso_from', 'mso_to', 'Unnamed: 0'])
     return hecat_df
 
 def transform_entry_date(hecat_df):
@@ -26,7 +26,6 @@ def transform_entry_date(hecat_df):
         hecat_df['Entry_month_cos'] = np.cos(2*np.pi*hecat_df['Entry_day']/max(hecat_df['Entry_day']))
         hecat_df['Entry_day_cos'] = np.cos(2*np.pi*hecat_df['Entry_day']/max(hecat_df['Entry_day']))
         hecat_df = hecat_df.drop(columns = ['Entry_date', 'Entry_month', 'Entry_day'])
-        return hecat_df
     return hecat_df
 
 def rename_columns(df):
