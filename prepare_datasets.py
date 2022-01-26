@@ -26,8 +26,9 @@ if __name__ == '__main__':
     df = transform_entry_date(df)
     df = df[df['duration']>0]
     
-
     df = df[columns_to_keep]
+    df['Profession_program'] = df['Profession_program'].astype('str').str.zfill(4).str.slice(stop=2)
+    df['Profession_program'] = df['Profession_program'].loc[df['Profession_program']!='0000']
     
     le = preprocessing.LabelEncoder()
     for col in cols:
