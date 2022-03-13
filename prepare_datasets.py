@@ -28,13 +28,18 @@ if __name__ == '__main__':
     
     df = df[columns_to_keep]
     df['Profession_program'] = df['Profession_program'].astype('str').str.zfill(4).str.slice(stop=2)
-    df['Profession_program'] = df['Profession_program'].loc[df['Profession_program']!='0000']
+    df = df.loc[df['Profession_program']!='00']
+    
+    col_list = ['Education_category', 'Profession_program', 'Gender',
+                                        'Age', 'Reason_for_PES_entry',
+                                        'Employability_assessment', 'Dissabilities']
+    df = df.loc[~np.array(df[col_list].duplicated())]
     
     le = preprocessing.LabelEncoder()
     for col in cols:
         df[col] = le.fit_transform(df[col].values)
 
-    # df['Profession_program'] = df['Profession_program'].astype('str')
+    df['Profession_program'] = df['Profession_program'].astype('str')
 
 
     scaler = MinMaxScaler() 
